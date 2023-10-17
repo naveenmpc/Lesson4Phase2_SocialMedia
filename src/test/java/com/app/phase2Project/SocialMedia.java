@@ -50,5 +50,42 @@ public class SocialMedia {
 	{
 		driver.close();
 	}
-	
+	@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+	public class BrowserGoogleDemo {
+		
+	WebDriver driver;
+		
+		@BeforeAll
+		public void startbrowser()
+		{
+	        driver = new ChromeDriver();
+			
+			driver.manage().window().maximize();
+			
+			driver.get("https://www.google.com/");
+		}
+
+		@DisplayName("BrowsergoogleDemo")
+		@ParameterizedTest
+		@CsvSource({
+			"wikipedia"
+		})
+		
+
+		public void Testmethod(String pagename) throws InterruptedException
+		{
+	        driver.findElement(By.xpath("//textarea[@id='APjFqb']")).sendKeys(pagename);
+	        
+	        }
+		public void testmethod2()
+		{
+			driver.findElement(By.id("voiceSearchButton")).click();
+		}
+		@AfterAll
+		public void closebrowser()
+		{
+			driver.close();
+		}
+		
+	}
 }
